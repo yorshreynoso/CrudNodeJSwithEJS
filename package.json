@@ -1,0 +1,18 @@
+{
+  "name": "yorsh",
+  "version": "1.0.0",
+  "description": "Learning the basic of nodejs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "yorsh reynoso",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
