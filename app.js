@@ -10,7 +10,7 @@ app.set('views', __dirname + '/views');
 //     res.end('Servidor funcionando');
 // });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 // server.listen(port, () => {
 //     console.log(`Listen on port ${port}`);
 // });
@@ -36,10 +36,6 @@ app.get('/services', (req, res) => {
 app.use((req, res, next) => {
     res.status(404).render("404", {404: "The url is incorrect"});
 })
-
-
-
-
 
 app.listen(port, () => {
     console.log(`Server listen on port ${port}`);
