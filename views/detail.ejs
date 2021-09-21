@@ -1,0 +1,79 @@
+<%- include('template/header', {titleWeb:'Edit pet'}) %> 
+
+<div class="container">
+    <h1>Pet detail</h1>
+    <% if (error) { %>
+        <p>
+            <%= message %> 
+            <a href="/pets" class="btn btn-dark btn-block"> get back Pets</a>
+        </p>
+    <% } %>
+
+    <%if(!error) {%>  
+        <%# i cannot use action="put" because it will give problems, i should change to put or use action='POST' but i will not use the verb put to edit%>  
+        <form id="formEdit">
+            <input type="text" class="form-control my-2" name="name" id="inputName" value="<%=pet.name %>">
+            <input type="text" class="form-control my-2" name="description" id="descriptionName" value="<%=pet.description %>">
+            <button class="btn btn-warning btn-block" id="btnEdit" data-id="<%= pet.id %>" type="submit">Edit</button>
+
+        </form>
+
+        <hr>
+        <button class="btn btn-danger btn-sm mt-5" id="btnDelete"  data-id="<%= pet.id %>">delete</button>
+                    
+    
+    <% } %>
+</div>
+
+<script>
+    const btnDelete = document.querySelector("#btnDelete");
+    const id = btnDelete.dataset.id; // viene de esta variable data-id="<%= pet.id %>", data.id es una variable global y se le asigna id
+    btnDelete.addEventListener('click', async () => {
+        try {
+           const data = await fetch(`/pets/${id}`, {
+               method: 'delete'
+           });
+           const res = await data.json();
+
+           if(res.state) {
+                window.location.href = '/pets'
+           } else {
+            console.log(res.message);
+            console.log(submit);
+           }
+        } catch (error) {
+            console.log(error);
+        }
+    });
+
+    const buttomEdit = document.querySelector("#formEdit");
+    buttomEdit.addEventListener("submit", async(e) => {
+        const name          = buttomEdit.elements["inputName"].value; //first option to get an element
+        const description   = buttomEdit.querySelector("#descriptionName").value; //second option to get an element too
+        const id            = buttomEdit.querySelector("button").dataset.id;
+        //console.log(id);
+        e.preventDefault(); // its very importan don't gorget to add preventDefault() because if i forget, i will start to restart my form
+       
+        try {
+            const data = await fetch(`/pets/${id}`, {
+               method   : 'put',
+               headers  : { 'Content-Type': 'application/json'},
+               body     : JSON.stringify({ name, description })
+           });
+
+           const res = await data.json();
+           if(res.state) {
+               window.location.href = '/pets';
+           } else {
+               console.log(res.message);
+           }
+        } catch (error) {
+            console.log(error);
+            console.log(res.message);
+
+        }
+    })
+
+</script>
+
+<%-include('template/footer') %> 

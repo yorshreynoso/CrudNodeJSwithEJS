@@ -1,0 +1,27 @@
+<%- include('template/header', {titleWeb:'create new pet'}) %> 
+
+<div class="container">
+    <h1>Create</h1>
+    <form action="/pets" method="POST">
+        <input
+            type="text"
+            placeholder="Please add name"
+            class="form-control my-2"
+            name="name"
+        >
+        <input
+            type="text"
+            placeholder="please add description"
+            class="form-control my-2"
+            name="description"
+        >
+        <button
+            class="btn btn-success btn-block"
+            type="submit"
+        >upload</button>
+
+    </form>
+
+</div>
+
+<%-include('template/footer') %> 

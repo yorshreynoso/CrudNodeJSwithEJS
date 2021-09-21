@@ -1,6 +1,9 @@
 <%-include('template/header', {titleWeb :"Index"}) %> 
 
    <div class="container">
+       <h1> CRUD MongoDB</h1>
+    <a class="btn btn-success btn-block my-4" href="/pets/create">Create New Pet</a>
+
         <table class="table">
             <thead>
                 <tr>
@@ -17,7 +20,11 @@
                             <th scope="row"><%= pet.id  %> </th>
                             <td> <%=pet.name%></td>
                             <td> <%=pet.description %></td>
-                            <td>algo aqui</td>
+                            <td>
+                                <a href="/pets/<%=pet.id%>" class="btn btn-warning btn-sm">
+                                    Edit
+                                </a>
+                            </td>
                         </tr>
                     <% }) %>
                 <% } %>
